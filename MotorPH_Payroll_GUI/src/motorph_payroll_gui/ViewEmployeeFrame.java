@@ -8,11 +8,23 @@ public class ViewEmployeeFrame extends JFrame {
     public ViewEmployeeFrame() {
         setTitle("View Employee");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 350);
+        setSize(500, 500);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
 
-        JPanel mainPanel = new JPanel(new GridBagLayout());
+        // main window panel set color to gradient
+        JPanel mainPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setPaint(new GradientPaint(0, 0, new Color(180, 180, 255), getWidth(), getHeight(), new Color(255, 180, 180)));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+
+        int row = 0;
+
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -23,7 +35,7 @@ public class ViewEmployeeFrame extends JFrame {
         // Title
         JLabel titleLabel = new JLabel("View Employee", SwingConstants.CENTER);
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
-        gbc.gridy = 0;
+        gbc.gridy = row++;
         mainPanel.add(titleLabel, gbc);
 
         // Employee # field
@@ -33,7 +45,7 @@ public class ViewEmployeeFrame extends JFrame {
         searchPanel.add(empNumField, BorderLayout.CENTER);
         JButton searchBtn = new JButton("Search");
         searchPanel.add(searchBtn, BorderLayout.EAST);
-        gbc.gridy = 1;
+        gbc.gridy = row++;
         mainPanel.add(searchPanel, gbc);
 
         // Result area

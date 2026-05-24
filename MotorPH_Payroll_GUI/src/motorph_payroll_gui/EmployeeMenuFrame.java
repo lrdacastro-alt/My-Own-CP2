@@ -8,17 +8,27 @@ public class EmployeeMenuFrame extends JFrame {
     public EmployeeMenuFrame() {
         setTitle("Employee Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(500, 500);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
 
-        JPanel mainPanel = new JPanel(new GridBagLayout());
+        // main window panel set color to gradient
+        JPanel mainPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setPaint(new GradientPaint(0, 0, new Color(180, 180, 255), getWidth(), getHeight(), new Color(255, 180, 180)));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+
+        // main window panel define padding
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(8, 0, 8, 0);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(6, 0, 6, 0);
         gbc.gridx = 0;
-        gbc.weightx = 1;
 
         // Title
         JLabel titleLabel = new JLabel("Employee Menu", SwingConstants.CENTER);

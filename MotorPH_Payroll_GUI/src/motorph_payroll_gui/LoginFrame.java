@@ -11,12 +11,11 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
         setTitle("MotorPH Payroll System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 1000); // window size
+        setSize(500, 500); // window size
         setLocationRelativeTo(null);
-        setResizable(true); //can't maximize
+        setResizable(true); //can maximize
 
-        // window
-        // set color to gradient
+        // main window panel set color to gradient
         JPanel mainPanel = new JPanel(new GridBagLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -27,16 +26,13 @@ public class LoginFrame extends JFrame {
             }
         };
 
+        int row = 0;
 
-        // window
-        // define rules
+        // main window panel define padding
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(6, 0, 6, 0);
-
-        int row = 0;
 
         // Logo
         ImageIcon logo = new ImageIcon("MotorPH_Payroll_GUI\\MotorPH_Home_Page.png");
@@ -61,28 +57,21 @@ public class LoginFrame extends JFrame {
         gbc.gridy = row++;
         mainPanel.add(subtitleLabel, gbc);
 
-        // Username
-        gbc.gridwidth = 1;
-        gbc.gridy = row;
+        // Panel for username/password
+        JPanel formPanel = new JPanel(new GridLayout(2, 2, 5, 8));
+        formPanel.setOpaque(false);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(8, 10, 8, 10));
+        formPanel.setPreferredSize(new Dimension(320, 70));
+        formPanel.add(new JLabel("Username:"));
+        usernameField = new JTextField(15);
+        formPanel.add(usernameField);
+        formPanel.add(new JLabel("Password:"));
+        passwordField = new JPasswordField(15);
+        formPanel.add(passwordField);
         gbc.gridx = 0;
-        gbc.weightx = 0.3;
-        mainPanel.add(new JLabel("Username:"), gbc);
-        usernameField = new JTextField();
-        gbc.gridx = 1;
-        gbc.weightx = 0.7;
-        mainPanel.add(usernameField, gbc);
-        row++;
-
-        // Password
-        gbc.gridx = 0;
-        gbc.gridy = row;
-        gbc.weightx = 0.3;
-        mainPanel.add(new JLabel("Password:"), gbc);
-        passwordField = new JPasswordField();
-        gbc.gridx = 1;
-        gbc.weightx = 0.7;
-        mainPanel.add(passwordField, gbc);
-        row++;
+        gbc.gridy = row++;
+        gbc.gridwidth = 2;
+        mainPanel.add(formPanel, gbc);
 
         // Login Button
         JButton loginButton = new JButton("Login");
@@ -114,6 +103,9 @@ public class LoginFrame extends JFrame {
                 dispose();
                 if (user.getRole().equals("Regular Employee")) {
                     new EmployeeMenuFrame().setVisible(true);
+                }
+                else if (user.getRole().equals("Payroll Staff")) {
+                    new PayrollStaffMenuFrame().setVisible(true);
                 }
             } else {
                 errorLabel.setText("Invalid username or password.");
