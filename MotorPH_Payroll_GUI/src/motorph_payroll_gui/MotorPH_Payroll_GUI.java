@@ -4,6 +4,7 @@
  */
 package motorph_payroll_gui;
 
+import javax.swing.JFrame;
 
 /**
  * @author Group 21
@@ -12,5 +13,6 @@ package motorph_payroll_gui;
 public class MotorPH_Payroll_GUI {
 
     public static void main(String[] args) {
+        new LoginFrame().setVisible(true);
     }
 }

@@ -9,20 +9,30 @@ package motorph_payroll_gui;
  */
 public class Employee {
 
+
     private String employeeID;
     private String firstName;
     private String lastName;
     private double hourlyRate;
+    private String birthday;
 
-    public Employee(String employeeID, String firstName, String lastName, double hourlyRate) {
+    public Employee(
+                String employeeID,
+                String firstName,
+                String lastName,
+                double hourlyRate,
+                String birthday) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.hourlyRate = hourlyRate;
+        this.birthday = birthday;
     }
 
     public String getProfileSummary() {
-        return "Employee ID: " + employeeID + "\nName: " + firstName + " " + lastName;
+        return "Employee ID : " + employeeID  + "\n" +
+               "Name        : " + firstName + " " + lastName + "\n" +
+               "Birthday    : " + birthday;
     }
 
     public String getSalaryDetails() {

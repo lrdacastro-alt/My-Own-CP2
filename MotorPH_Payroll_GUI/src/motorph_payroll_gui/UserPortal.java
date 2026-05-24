@@ -24,6 +24,9 @@ public class UserPortal {
         if (username.equals("employee") && password.equals("12345")) {
             this.role = "Regular Employee";
             return true;
+        } else if (username.equals("payroll_staff") && password.equals("12345")) {
+            this.role = "Payroll Staff";
+            return true;
         }
         return false;
     }
